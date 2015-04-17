@@ -1,7 +1,8 @@
 import pygame
 
-class Player():
-    def __init__(self, pos):      
+class Player(pygame.sprite.Sprite):
+    def __init__(self, pos):  
+        pygame.sprite.Sprite.__init__(self, self.containers)    
         self.upImages = [pygame.image.load("Resources/Objects/Player/Briansteelup1.PNG"),
                          pygame.image.load("Resources/Objects/Player/Briansteelup2.PNG"),
                          pygame.image.load("Resources/Objects/Player/Briansteelup3.PNG")]
@@ -55,7 +56,10 @@ class Player():
         self.speed = [self.speedx, self.speedy]
         self.attacking = False             
 
-    def update(self, width, height):
+    def update(*args):
+        self = args[0]
+        width = args[1]
+        height = args[2]
         self.didBounceX = False
         self.didBounceY = False
         self.move()
@@ -118,19 +122,20 @@ class Player():
             self.image = self.images[self.frame]
     
     def collideWall(self, other):
-        if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
-            if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
-                if not self.didBounceX:
-                    self.speedx = -self.speedx
-                    self.move()
-                    self.speedx = 0
-                    self.didBouncex = True
-                if not self.didBounceY:
-                    self.speedy = -self.speedy
-                    self.move()
-                    self.speedy = 0
-                    self.didBounceY = True
-                    #print "hit Ball"
+        if not self.didBounceX:
+            self.speedx = -self.speedx
+            self.move()
+            self.move()
+            self.speedx = 0
+            self.didBouncex = True
+        if not self.didBounceY:
+            self.speedy = -self.speedy
+            self.move()
+            self.move()
+            self.move()
+            self.speedy = 0
+            self.didBounceY = True
+            #print "hit Ball"
     
     def go(self, direction):
         if direction == "attack":
