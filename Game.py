@@ -43,8 +43,6 @@ for monsterPos in level.monsterList:
     Enemy(monsterPos)
 player = Player(startBlocks.sprites()[0].rect.center)
 
-
-
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
@@ -71,6 +69,7 @@ while True:
     
     playersHitWalls = pygame.sprite.groupcollide(players, walls, False, False)
     projectilesHitWalls = pygame.sprite.groupcollide(projectiles, walls, True, False)
+    projectilesHitEnemies = pygame.sprite.groupcollide(projectiles, enemies, True, True)
     
     for player in playersHitWalls:
 			for wall in playersHitWalls[player]:
