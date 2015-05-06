@@ -79,13 +79,16 @@ class Enemy(pygame.sprite.Sprite):
             self.image = self.images[self.frame]
             
     def collideWall(self, other):
+        print "hitting"
         if not self.didBounceX:
             self.speedx = -self.speedx
-            self.didBouncex = True
+            self.didBounceX = True
         if not self.didBounceY:
             self.speedy = -self.speedy
             self.didBounceY = True
             #print "hit Ball"
+        self.move()
+        self.move()
                     
     def distance(self, pt):
         x1 = self.rect.center[0]

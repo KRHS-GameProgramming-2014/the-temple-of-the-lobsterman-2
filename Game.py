@@ -37,7 +37,7 @@ Wall.containers = (all, walls)
 level = Level(size, 30)
 level.loadLevel(1)
 for monsterPos in level.monsterList:
-    Enemy(monsterPos)
+    Enemy(monsterPos,[random.randint(-2,2),random.randint(-2,2)])
 player = Player(startBlocks.sprites()[0].rect.center)
 
 
@@ -67,12 +67,19 @@ while True:
                 player.go("stop left")
     
     playersHitWalls = pygame.sprite.groupcollide(players, walls, False, False)
+    enemiesHitWalls = pygame.sprite.groupcollide(enemies, walls, False, False)
+    
+    all.update(width, height)
     
     for player in playersHitWalls:
 			for wall in playersHitWalls[player]:
 				player.collideWall(wall)
+                
+    for enemy in enemiesHitWalls:
+			for wall in enemiesHitWalls[enemy]:
+				enemy.collideWall(wall)
     
-    all.update(width, height)
+    
         
     dirty = all.draw(screen)
     pygame.display.update(dirty)
