@@ -1,4 +1,5 @@
 import pygame
+from Bullet import Bullet
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos):  
@@ -145,6 +146,7 @@ class Player(pygame.sprite.Sprite):
             self.attacking = True
             self.frame = 0
             self.waitCount = 0
+            Bullet(self.rect.center, self.facing)
         if direction == "up":
             self.facing = "up"
             self.changed = True

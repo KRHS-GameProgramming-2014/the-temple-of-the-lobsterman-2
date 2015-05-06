@@ -6,6 +6,7 @@ from EndBlock import EndBlock
 from Level import Level
 from Player import Player
 from Enemy2 import Enemy
+from Bullet import Bullet
 pygame.init()
 
 clock = pygame.time.Clock()
@@ -24,12 +25,14 @@ players = pygame.sprite.Group()
 startBlocks = pygame.sprite.Group()
 endBlocks = pygame.sprite.Group()
 walls = pygame.sprite.Group()
+projectiles = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 Tile.containers = (all, tiles)
 Player.containers = (all, players)
 StartBlock.containers = (all, startBlocks)
 EndBlock.containers = (all, endBlocks)
+Bullet.containers = (all, projectiles)
 Wall.containers = (all, walls)
 
 level = Level(size, 30)
@@ -61,6 +64,7 @@ while True:
                 player.go("stop left")
     
     playersHitWalls = pygame.sprite.groupcollide(players, walls, False, False)
+    projectilesHitWalls = pygame.sprite.groupcollide(projectiles, walls, True, False)
     
     for player in playersHitWalls:
 			for wall in playersHitWalls[player]:
