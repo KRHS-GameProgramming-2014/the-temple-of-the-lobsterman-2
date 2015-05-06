@@ -21,6 +21,7 @@ screen = pygame.display.set_mode(size)
 
 tiles = pygame.sprite.Group()
 players = pygame.sprite.Group()
+enemies = pygame.sprite.Group()
 startBlocks = pygame.sprite.Group()
 endBlocks = pygame.sprite.Group()
 walls = pygame.sprite.Group()
@@ -28,13 +29,18 @@ all = pygame.sprite.OrderedUpdates()
 
 Tile.containers = (all, tiles)
 Player.containers = (all, players)
+Enemy.containers = (all, enemies)
 StartBlock.containers = (all, startBlocks)
 EndBlock.containers = (all, endBlocks)
 Wall.containers = (all, walls)
 
 level = Level(size, 30)
 level.loadLevel(1)
+for monsterPos in level.monsterList:
+    Enemy(monsterPos)
 player = Player(startBlocks.sprites()[0].rect.center)
+
+
 
 while True:
     for event in pygame.event.get():

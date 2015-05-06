@@ -1,6 +1,6 @@
 import pygame
 
-class Base():
+class Enemy(pygame.sprite.Sprite):
     def __init__(image, pos, speed=[10,10]):
 		image.upImages =    [pygame.Image.load("Resources/Objects/Enemy/skeleu.PNG")]
 
