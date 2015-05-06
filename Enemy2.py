@@ -1,7 +1,8 @@
 import pygame
 
-class Enemy():
+class Enemy(pygame.sprite.Sprite):
     def __init__(self, pos, speed=[1,1]):
+        pygame.sprite.Sprite.__init__(self, self.containers)
         self.upImages =    [pygame.image.load("Resources/Objects/Enemy/skeleu.PNG")]
 
         self.leftImages =  [pygame.image.load("Resources/Objects/Enemy/skelel3.PNG")]
@@ -36,7 +37,10 @@ class Enemy():
         self.speedy = speed[1]
         self.speed = [self.speedx, self.speedy]
          
-    def update(self, width, height):
+    def update(*args):
+        self = args[0]
+        width = args[1]
+        height = args[2]
         self.didBounceX = False
         self.didBounceY = False
         self.move()
@@ -53,12 +57,12 @@ class Enemy():
             #print "trying to hit Wall"
             if self.rect.left < 0 or self.rect.right > width:
                 self.didBounceX = True
-                self.speedx = 6
+                self.speedx = -self.speedx
                 #print "hit xWall"
         if not self.didBounceY:
             if self.rect.top < 0 or self.rect.bottom > height:
                 self.didBounceY = True
-                self.speedy = 6
+                self.speedy = -self.speedy
                 #print "hit yWall"
     
     def animate(self):       
@@ -75,15 +79,13 @@ class Enemy():
             self.image = self.images[self.frame]
             
     def collideWall(self, other):
-        if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
-            if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
-                if not self.didBounceX:
-                    self.speedx = -self.speedx
-                    self.didBouncex = True
-                if not self.didBounceY:
-                    self.speedy = -self.speedy
-                    self.didBounceY = True
-                    #print "hit Ball"
+        if not self.didBounceX:
+            self.speedx = -self.speedx
+            self.didBouncex = True
+        if not self.didBounceY:
+            self.speedy = -self.speedy
+            self.didBounceY = True
+            #print "hit Ball"
                     
     def distance(self, pt):
         x1 = self.rect.center[0]
