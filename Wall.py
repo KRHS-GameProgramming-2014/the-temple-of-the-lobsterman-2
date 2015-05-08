@@ -9,7 +9,7 @@ class Wall(pygame.sprite.Sprite):
 		self.living = True
 		
 	def place(self, pos):
-		print pos
+		#print pos
 		self.rect.topleft = pos
 		
 	def update(*args):

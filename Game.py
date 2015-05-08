@@ -19,7 +19,6 @@ bgColor = r,g,b = 0, 0, 0
 
 screen = pygame.display.set_mode(size)
 
-
 tiles = pygame.sprite.Group()
 players = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
@@ -38,7 +37,8 @@ Bullet.containers = (all, projectiles)
 Wall.containers = (all, walls)
 
 level = Level(size, 30)
-level.loadLevel(1)
+lev = 1
+level.loadLevel(lev)
 for monsterPos in level.monsterList:
     Enemy(monsterPos)
 player = Player(startBlocks.sprites()[0].rect.center)
@@ -68,13 +68,25 @@ while True:
                 player.go("stop left")
     
     playersHitWalls = pygame.sprite.groupcollide(players, walls, False, False)
+    playersHitEnds = pygame.sprite.groupcollide(players, endBlocks, False, False)
     projectilesHitWalls = pygame.sprite.groupcollide(projectiles, walls, True, False)
     projectilesHitEnemies = pygame.sprite.groupcollide(projectiles, enemies, True, True)
     
     for player in playersHitWalls:
-			for wall in playersHitWalls[player]:
-				player.collideWall(wall)
+        for wall in playersHitWalls[player]:
+            player.collideWall(wall)
     
+    for player in playersHitEnds:
+        for wall in playersHitEnds[player]:
+            for obj in all.sprites():
+                obj.kill()
+            all.update(width, height)
+            lev += 1
+            level.loadLevel(lev)
+            for monsterPos in level.monsterList:
+                Enemy(monsterPos)
+            player = Player(startBlocks.sprites()[0].rect.center)
+                    
     all.update(width, height)
         
     dirty = all.draw(screen)
