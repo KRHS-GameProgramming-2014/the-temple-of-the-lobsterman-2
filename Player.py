@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         self.maxWait = 60*.25
         self.image = self.images[self.frame]
         self.rect = self.image.get_rect(center = pos)
-        self.maxSpeed = 5  
+        self.maxSpeed = 3  
         self.speedx = 0
         self.speedy = 0
         self.speed = [self.speedx, self.speedy]
@@ -123,20 +123,14 @@ class Player(pygame.sprite.Sprite):
             self.image = self.images[self.frame]
     
     def collideWall(self, other):
-        if not self.didBounceX:
-            self.speedx = -self.speedx
+            self.speedx = -self.speedx *2
+            self.speedy = -self.speedy *2
             self.move()
+            print self.rect.center
             self.move()
+            print self.rect.center
             self.speedx = 0
-            self.didBouncex = True
-        if not self.didBounceY:
-            self.speedy = -self.speedy
-            self.move()
-            self.move()
-            self.move()
             self.speedy = 0
-            self.didBounceY = True
-            #print "hit Ball"
     
     def go(self, direction):
         if direction == "attack":

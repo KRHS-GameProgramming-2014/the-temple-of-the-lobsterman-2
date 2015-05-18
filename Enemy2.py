@@ -79,7 +79,7 @@ class Enemy(pygame.sprite.Sprite):
             self.image = self.images[self.frame]
             
     def collideWall(self, other):
-        print "hitting"
+        #print "hitting"
         if not self.didBounceX:
             self.speedx = -self.speedx
             self.didBounceX = True
