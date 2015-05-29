@@ -7,6 +7,7 @@ from Level import Level
 from Player import Player
 from Enemy2 import Enemy
 from Bullet import Bullet
+from Boss import Boss
 pygame.init()
 
 clock = pygame.time.Clock()
