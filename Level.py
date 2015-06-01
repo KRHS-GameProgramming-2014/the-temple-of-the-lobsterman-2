@@ -45,7 +45,8 @@ class Level():
                 if c == "m":
                     Tile([x*self.blockSize,y*self.blockSize])
                     self.monsterList += [[x*self.blockSize,y*self.blockSize]]
-
+				
+                    
 
 
 
