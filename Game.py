@@ -44,6 +44,8 @@ lev = 1
 level.loadLevel(lev)
 for monsterPos in level.monsterList:
     Enemy(monsterPos,[random.randint(-2,2),random.randint(-2,2)])
+for BossPos in level.BossList:
+    Enemy(BossPos,[random.randint(-2,2),random.randint(-2,2)])
 player = Player(startBlocks.sprites()[0].rect.center)
 
 while True:
@@ -84,8 +86,7 @@ while True:
                 
     for enemy in enemiesHitWalls:
             for wall in enemiesHitWalls[enemy]:
-                enemy.collideWall(wall)
-    
+                enemy.collideWall(wall)    
 
     for player in playersHitEnds:
         for wall in playersHitEnds[player]:

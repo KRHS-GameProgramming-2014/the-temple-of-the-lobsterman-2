@@ -12,6 +12,7 @@ class Level():
         self.blockSize = blockSize
         self.level = ""
         self.monsterList = []
+        self.BossList = []
         
     def loadLevel(self, level):
         self.level = level
@@ -45,13 +46,13 @@ class Level():
                 if c == "m":
                     Tile([x*self.blockSize,y*self.blockSize])
                     self.monsterList += [[x*self.blockSize,y*self.blockSize]]
-				if c == "B":
-					 Tile([x*self.blockSize,y*self.blockSize])
+                if c == "B":
+                    Tile([x*self.blockSize,y*self.blockSize])
                     self.BossList += [[x*self.blockSize,y*self.blockSize]]
                     
 
 
 
-\
+
 
 

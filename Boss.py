@@ -11,21 +11,9 @@ class Boss(pygame.sprite.Sprite):
         self.rightImages =  [pygame.image.load("Resources/Objects/Enemy/lobstaright1.PNG"),
                              pygame.image.load("Resources/Objects/Enemy/Lobstaright2.PNG")]
         
-        self.facing = "up"
-        self.changed = False
-        self.images = self.upImages
-        self.frame = 0
         self.facing = "down"
         self.changed = False
         self.images = self.downImages
-        self.frame = 0
-        self.facing = "right"
-        self.changed = False
-        self.images = self.rightImages
-        self.frame = 0
-        self.facing = "left"
-        self.changed = False
-        self.images = self.leftImages
         self.frame = 0
         self.maxFrame = len(self.images) - 1
         self.image = self.images[self.frame]
